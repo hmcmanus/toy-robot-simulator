@@ -40,6 +40,46 @@ public class ToyRobot {
         }
     }
 
+    public void turnLeft() {
+        switch (this.direction) {
+            case NORTH:
+                this.direction = Direction.WEST;
+                break;
+            case EAST:
+                this.direction = Direction.SOUTH;
+                break;
+            case SOUTH:
+                this.direction = Direction.EAST;
+                break;
+            case WEST:
+                this.direction = Direction.NORTH;
+                break;
+            default:
+                System.out.println("Can't move this direction");
+                break;
+        }
+    }
+
+    public void turnRight() {
+        switch (this.direction) {
+            case NORTH:
+                this.direction = Direction.EAST;
+                break;
+            case EAST:
+                this.direction = Direction.SOUTH;
+                break;
+            case SOUTH:
+                this.direction = Direction.WEST;
+                break;
+            case WEST:
+                this.direction = Direction.NORTH;
+                break;
+            default:
+                System.out.println("Can't move this direction");
+                break;
+        }
+    }
+
     public enum Direction {
         NORTH,
         EAST,
