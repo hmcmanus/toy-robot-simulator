@@ -3,13 +3,9 @@ package com.rea;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.hamcrest.core.Is;
-import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 public class GameTest {
     private Game game;
@@ -56,4 +52,10 @@ public class GameTest {
     public void I_give_it_the_RIGHT_command() throws Throwable {
         toyRobot.turnRight();
     }
+
+    @Then("^the toy should not be on the board$")
+    public void the_game_should_not_be_started() throws Throwable {
+        assertNull(game.getToyRobot());
+    }
+
 }

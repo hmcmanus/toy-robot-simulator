@@ -21,7 +21,7 @@ public class Command {
         String[] actionAndParams = rawCommand.split(" ");
         if (isGoodAction(actionAndParams[0])) {
             if (this.action == Action.PLACE) {
-                if (actionAndParams.length > 1 & isGoodParams(actionAndParams[1])){
+                if (actionAndParams.length > 1 && isGoodParams(actionAndParams[1])){
                     successfulParse = true;
                 }
             } else {
