@@ -28,7 +28,6 @@ public class Command {
                 // At this stage we know the command is good
                 successfulParse = true;
             }
-
         }
         return successfulParse;
     }
@@ -63,34 +62,52 @@ public class Command {
         return validAction;
     }
 
-    public void execute(Game game) {
+    public void execute(Simulator simulator) {
         switch (this.action) {
             case PLACE:
-                game.setRobot(new ToyRobot(dirParameter, xParameter, yParameter));
+                handlePlaceCommand(simulator);
                 break;
             case MOVE:
-                if (game.getToyRobot()!= null) {
-                    game.getToyRobot().move();
-                }
+                handleMoveCommand(simulator);
                 break;
             case LEFT:
-                if (game.getToyRobot() != null) {
-                    game.getToyRobot().turnLeft();
+                if (simulator.getToyRobot() != null) {
+                    simulator.getToyRobot().turnLeft();
                 }
                 break;
             case RIGHT:
-                if (game.getToyRobot() != null) {
-                    game.getToyRobot().turnRight();
+                if (simulator.getToyRobot() != null) {
+                    simulator.getToyRobot().turnRight();
                 }
                 break;
             case REPORT:
-                if (game.getToyRobot() != null) {
-                    game.getToyRobot().report();
+                if (simulator.getToyRobot() != null) {
+                    simulator.getToyRobot().report();
                 }
                 break;
             default:
                 System.out.println("Ignoring command");
         }
+    }
+
+    private void handleMoveCommand(Simulator simulator) {
+        if (simulator.getToyRobot() != null) {
+            simulator.getToyRobot().move();
+        }
+    }
+
+    private void handlePlaceCommand(Simulator simulator) {
+        if (isXValid(Simulator.TABLE_X_MAX) && isYValid(Simulator.TABLE_Y_MAX)) {
+            simulator.setRobot(new ToyRobot(dirParameter, xParameter, yParameter));
+        }
+    }
+
+    private boolean isYValid(int maxValue) {
+        return (yParameter >= 0 && yParameter <= maxValue);
+    }
+
+    private boolean isXValid(int maxValue) {
+        return (xParameter >= 0 && xParameter <= maxValue);
     }
 
     public enum Action {

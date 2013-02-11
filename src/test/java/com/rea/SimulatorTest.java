@@ -7,29 +7,29 @@ import cucumber.api.java.en.When;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
-public class GameTest {
-    private Game game;
+public class SimulatorTest {
+    private Simulator simulator;
     private ToyRobot toyRobot;
 
-    @Given("^the game has started$")
-    public void the_game_has_started() throws Throwable {
-        game = new Game();
+    @Given("^the simulator has started$")
+    public void the_simulator_has_started() throws Throwable {
+        simulator = new Simulator();
     }
 
     @Given("^I issue the command \"([^\"]*)\"$")
     public void I_issue_the_command(String command) throws Throwable {
-        game.issueCommand(command);
+        simulator.issueCommand(command);
     }
 
     @Given("^the robot is in position (\\d+),(\\d+),\"([^\"]*)\"$")
     public void the_robot_is_in_position_(int x, int y, String direction) throws Throwable {
         toyRobot = new ToyRobot(ToyRobot.Direction.valueOf(direction), 0, 0);
-        game.setRobot(toyRobot);
+        simulator.setRobot(toyRobot);
     }
 
     @Then("^the position should be (\\d+),(\\d+),\"([^\"]*)\"$")
     public void the_position_should_be_(int xPosition, int yPosition, String direction) throws Throwable {
-        ToyRobot movedRobot = game.getToyRobot();
+        ToyRobot movedRobot = simulator.getToyRobot();
         if (movedRobot == null){
             fail("Moved robot is null");
         }
@@ -54,8 +54,8 @@ public class GameTest {
     }
 
     @Then("^the toy should not be on the board$")
-    public void the_game_should_not_be_started() throws Throwable {
-        assertNull(game.getToyRobot());
+    public void the_simulator_should_not_be_started() throws Throwable {
+        assertNull(simulator.getToyRobot());
     }
 
 }
