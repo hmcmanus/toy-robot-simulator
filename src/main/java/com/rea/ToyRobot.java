@@ -80,6 +80,10 @@ public class ToyRobot {
         }
     }
 
+    public void report() {
+        System.out.println(this.x + "," + this.y + "," + this.direction.toString());
+    }
+
     public enum Direction {
         NORTH,
         EAST,
