@@ -8,10 +8,20 @@ public class Command {
     private int yParameter;
     private ToyRobot.Direction dirParameter;
 
+    /**
+     * Constructs the command object with the command string as input
+     *
+     * @param action String representing the action of the command
+     */
     public Command(String action) {
         this.rawCommand = action;
     }
 
+    /**
+     * Validates that the command given to the simulator
+     *
+     * @return boolean indicating validity of command
+     */
     public boolean isValid() {
         return parseCommand();
     }
@@ -62,6 +72,11 @@ public class Command {
         return validAction;
     }
 
+    /**
+     * Executes the command given to the simulator
+     *
+     * @param simulator The simulator to action the command on
+     */
     public void execute(Simulator simulator) {
         switch (this.action) {
             case PLACE:
@@ -92,8 +107,36 @@ public class Command {
 
     private void handleMoveCommand(Simulator simulator) {
         if (simulator.getToyRobot() != null) {
-            simulator.getToyRobot().move();
+            if (canMoveRobot(simulator)) {
+                simulator.getToyRobot().move();
+            }
         }
+    }
+
+    private boolean canMoveRobot(Simulator simulator) {
+        boolean movableRobot = true;
+
+        if ( simulator.getToyRobot().getDirection() == ToyRobot.Direction.SOUTH &&
+                simulator.getToyRobot().getYPosition() == 0) {
+            movableRobot = false;
+        }
+
+        if ( simulator.getToyRobot().getDirection() == ToyRobot.Direction.WEST &&
+                simulator.getToyRobot().getXPosition() == 0) {
+            movableRobot = false;
+        }
+
+        if ( simulator.getToyRobot().getDirection() == ToyRobot.Direction.EAST &&
+                simulator.getToyRobot().getXPosition() == Simulator.TABLE_X_MAX) {
+            movableRobot = false;
+        }
+
+        if ( simulator.getToyRobot().getDirection() == ToyRobot.Direction.NORTH &&
+                simulator.getToyRobot().getYPosition() == Simulator.TABLE_Y_MAX) {
+            movableRobot = false;
+        }
+
+        return movableRobot;
     }
 
     private void handlePlaceCommand(Simulator simulator) {
@@ -110,12 +153,12 @@ public class Command {
         return (xParameter >= 0 && xParameter <= maxValue);
     }
 
-    public enum Action {
+    private enum Action {
         PLACE,
         MOVE,
         LEFT,
         RIGHT,
-        REPORT;
+        REPORT
     }
 
 }

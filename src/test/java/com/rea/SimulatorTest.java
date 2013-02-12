@@ -33,9 +33,9 @@ public class SimulatorTest {
         if (movedRobot == null){
             fail("Moved robot is null");
         }
-        assertThat(movedRobot.getDirection(), is(ToyRobot.Direction.valueOf(direction)));
-        assertEquals(movedRobot.getXPosition(), xPosition);
-        assertEquals(movedRobot.getYPosition(), yPosition);
+        assertThat(ToyRobot.Direction.valueOf(direction), is(movedRobot.getDirection()));
+        assertEquals(xPosition, movedRobot.getXPosition());
+        assertEquals(yPosition, movedRobot.getYPosition());
     }
 
     @When("^I give it the LEFT command$")
