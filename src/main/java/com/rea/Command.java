@@ -77,7 +77,8 @@ public class Command {
      *
      * @param simulator The simulator to action the command on
      */
-    public void execute(Simulator simulator) {
+    public String execute(Simulator simulator) {
+        String result = null;
         switch (this.action) {
             case PLACE:
                 handlePlaceCommand(simulator);
@@ -97,12 +98,13 @@ public class Command {
                 break;
             case REPORT:
                 if (simulator.getToyRobot() != null) {
-                    simulator.getToyRobot().report();
+                    result = simulator.getToyRobot().report();
                 }
                 break;
             default:
-                System.out.println("Ignoring command");
+                // log - Ignoring command
         }
+        return result;
     }
 
     private void handleMoveCommand(Simulator simulator) {
