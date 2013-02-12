@@ -38,19 +38,19 @@ public class ToyRobot {
     public void move() {
         switch (this.direction) {
             case NORTH:
-                this.y = ++this.y;
+                ++this.y;
                 break;
             case EAST:
-                this.x = ++this.x;
+                ++this.x;
                 break;
             case SOUTH:
-                this.y = --this.y;
+                --this.y;
                 break;
             case WEST:
-                this.x = --this.x;
+                --this.x;
                 break;
             default:
-                System.out.println("Can't move this direction");
+                // Should not get to this point - log
                 break;
         }
     }
@@ -64,16 +64,16 @@ public class ToyRobot {
                 this.direction = Direction.WEST;
                 break;
             case EAST:
-                this.direction = Direction.SOUTH;
+                this.direction = Direction.NORTH;
                 break;
             case SOUTH:
                 this.direction = Direction.EAST;
                 break;
             case WEST:
-                this.direction = Direction.NORTH;
+                this.direction = Direction.SOUTH;
                 break;
             default:
-                System.out.println("Can't move this direction");
+                // Should not get to this point - log
                 break;
         }
     }
@@ -96,7 +96,7 @@ public class ToyRobot {
                 this.direction = Direction.NORTH;
                 break;
             default:
-                System.out.println("Can't move this direction");
+                // Should not get to this point - log
                 break;
         }
     }

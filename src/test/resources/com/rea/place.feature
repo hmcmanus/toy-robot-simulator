@@ -27,3 +27,5 @@ Feature: Placing the toy on the board
   | "PLACE 89,55,NORTH" |
   | "PLACE 5,5,NORTH" |
   | "PLACE -1,-34,NORTH" |
+  | "PLACE 0,0,NORTH,0" |
+  | "PLACE 99999999999,0,NORTH" |

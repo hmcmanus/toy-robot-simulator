@@ -1,10 +1,17 @@
 Feature: Moving the toy around the board
 
-  Scenario: Successful move of the toy
+  Scenario Outline: Successful move of the toy
     Given the simulator has started
-     When I issue the command "PLACE 0,0,NORTH"
+     When I issue the command <starting-position>
       And I issue the command "MOVE"
-     Then the position should be 0,1,"NORTH"
+     Then the position should be <end-position>
+
+  Examples:
+  | starting-position | end-position |
+  | "PLACE 0,0,NORTH" | 0,1,"NORTH" |
+  | "PLACE 0,0,EAST" | 1,0,"EAST" |
+  | "PLACE 0,1,SOUTH" | 0,0,"SOUTH" |
+  | "PLACE 1,0,WEST" | 0,0,"WEST" |
 
   Scenario: Toy doesn't move if the simulator isn't started
     Given the simulator has started

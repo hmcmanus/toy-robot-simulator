@@ -4,7 +4,6 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
 public class SimulatorTest {
@@ -21,14 +20,17 @@ public class SimulatorTest {
     }
 
     @Then("^the position should be (\\d+),(\\d+),\"([^\"]*)\"$")
-    public void the_position_should_be_(int xPosition, int yPosition, String direction) throws Throwable {
-        ToyRobot movedRobot = simulator.getToyRobot();
-        if (movedRobot == null){
-            fail("Moved robot is null");
+    public void the_position_should_be_(String xPosition, String yPosition, String direction) throws Throwable {
+        String output = simulator.issueCommand("REPORT");
+        if (output == null){
+            fail("Output null");
         }
-        assertThat(ToyRobot.Direction.valueOf(direction), is(movedRobot.getDirection()));
-        assertEquals(xPosition, movedRobot.getXPosition());
-        assertEquals(yPosition, movedRobot.getYPosition());
+
+        String[] splitOut = output.split(",");
+
+        assertEquals(splitOut[0], xPosition );
+        assertEquals(splitOut[1], yPosition);
+        assertEquals(splitOut[2], direction);
     }
 
     @Then("^the toy should not be on the board$")

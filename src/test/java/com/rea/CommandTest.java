@@ -1,11 +1,9 @@
 package com.rea;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
-import static junit.framework.Assert.*;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertTrue;
 
 public class CommandTest {
 

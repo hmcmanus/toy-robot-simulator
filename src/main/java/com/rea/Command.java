@@ -108,10 +108,8 @@ public class Command {
     }
 
     private void handleMoveCommand(Simulator simulator) {
-        if (simulator.getToyRobot() != null) {
-            if (canMoveRobot(simulator)) {
-                simulator.getToyRobot().move();
-            }
+        if (simulator.getToyRobot() != null && canMoveRobot(simulator)) {
+            simulator.getToyRobot().move();
         }
     }
 
